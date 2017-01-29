@@ -9,33 +9,32 @@ previous-page: nested-blocks
 next-page: control-structures
 ---
 
-As a rule, files should contain a *single* logical compilation unit. By
-"logical" I mean a class, trait or object. One exception to this
-guideline is for classes or traits which have companion objects.
-Companion objects should be grouped with their corresponding class or
-trait in the same file. These files should be named according to the
-class, trait or object they contain:
+Как правило файл хранят *одинственный* обособленный компиляционный модуль. Под
+"обособленным" я подразумеваю класс, трейт или объект. Единственно исключение из этого
+руководства, что некоторые классы или трейты могут иметь объекты-компаньоны.
+Объекты-компаньоны должны быть сгруппированы с их соответствующими классами или
+трейтами в одном и том же файле. Такие файлы должны иметь имя в согласно имени класса, трейта
+или объекта, который они содержат:
 
     package com.novell.coolness
 
     class Inbox { ... }
 
-    // companion object
+    // объект-компаньон
     object Inbox { ... }
 
-These compilation units should be placed within a file named
-`Inbox.scala` within the `com/novell/coolness` directory. In short, the
-Java file naming and positioning conventions should be preferred,
-despite the fact that Scala allows for greater flexibility in this
-regard.
+Данные модули компиляции должны быть объеденены в файл с именем 
+`Inbox.scala` внутри каталога `com/novell/coolness`. В кратце, 
+соглашение о файловом именовании Java предпочтительно,
+несмотря на факт, что Scala имеет большую гибкостьв этом отношении.
 
-## Multi-Unit Files
+## Многомодульные файлы
 
-Despite what was said above, there are some important situations which
-warrant the inclusion of multiple compilation units within a single
-file. One common example is that of a sealed trait and several
-sub-classes (often emulating the ADT language feature available in
-functional languages):
+Несмотря на всё сказанное выше, есть некоторые важные случаи, в которых есть
+основание для включения нескольких компиляционных модулей в один файл.
+Один из распространённых примеров - это запечатанные трейты и несколько подклассов
+(зачастую функция языка, эмулирующая Алгебраические типы данных, доступные в
+функциональных языках программирования):
 
     sealed trait Option[+A]
 
@@ -43,26 +42,25 @@ functional languages):
 
     case object None extends Option[Nothing]
 
-Because of the nature of sealed superclasses (and traits), all subtypes
-*must* be included in the same file. Thus, such a situation definitely
-qualifies as an instance where the preference for single-unit files
-should be ignored.
+Из-за природы запечатанных суперклассов (и трейтов), все подтипы
+*должны* быть включены в один и тот же файл. Таким образом данная ситуация
+определённо определяется как случай, когда предочтение файлам с одинм модулем
+следует игнорировать.
 
-Another case is when multiple classes logically form a single, cohesive
-group, sharing concepts to the point where maintenance is greatly served
-by containing them within a single file. These situations are harder to
-predict than the aforementioned sealed supertype exception. Generally
-speaking, if it is *easier* to perform long-term maintenance and
-development on several units in a single file rather than spread across
-multiple, then such an organizational strategy should be preferred for
-these classes. However, keep in mind that when multiple units are
-contained within a single file, it is often more difficult to find
-specific units when it comes time to make changes.
+Другой случай, когда множество классов представляют логическую форм целй, 
+связанной группы с общим контекстом. В данном случае обслуживание значительно
+если они будут находиться в одном файле. Такие ситуации сложнее предугадать,
+нежели вышеупомянутые запечатанные трейты. Вообще-то говоря, если *проще* 
+проводить долгосрочное обслуживание и разработку на несколькими модулями 
+в одном файле, в не распределены по нескольким, тогда один файл будет хорошим решением.
+Однако, всегда помните, что хранить модули в одном файле зачастую более сложно
+как с точки зрения поиска редактируемой сущности, так и по причине более долгой перекомпиляции
+данного файла и более медленной работы среды разработки.
 
-**All multi-unit files should be given camelCase names with a lower-case
-first letter.** This is a very important convention. It differentiates
-multi- from single-unit files, greatly easing the process of finding
-declarations. These filenames may be based upon a significant type which
-they contain (e.g. `option.scala` for the example above), or may be
-descriptive of the logical property shared by all units within (e.g.
+**Всем много-модульным файлам давайте имена в стиле camelCase начинающиеся со строчной (маленькой)
+первой буквы.** Это очень важное соглашение. Оно отличает много-
+от одно-модульных классов, сильно облегчая процесс поиска объявлений.
+Данные имена файлов могут основываться на значимых типах, которые они содержат 
+(т.е. `option.scala` как пример выше), или могут описывать
+логическое свойство присущее всем иодулям внутри (например
 `ast.scala`).
