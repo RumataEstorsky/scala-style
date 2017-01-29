@@ -1,6 +1,6 @@
 ---
 layout: overview-large
-title: Nested Blocks
+title: Вложенные блоки
 
 partof: style-guide
 num: 5
@@ -9,38 +9,36 @@ previous-page: types
 next-page: files
 ---
 
-## Curly Braces
+## Фигурные скобки
 
-Opening curly braces (`{`) must be on the same line as the declaration
-they represent:
+Открывающая фигурная скобка (`{`) должна быть на той же строке, что и объявление
+которое она представляет:
 
     def foo = {
       ...
     }
 
-Technically, Scala's parser *does* support GNU-style notation with
-opening braces on the line following the declaration. However, the
-parser is not terribly predictable when dealing with this style due to
-the way in which semi-colon inference is implemented. Many headaches
-will be saved by simply following the curly brace convention
-demonstrated above.
+Формально, парсер Scala's *поддерживает* GNU-нотацию, где
+открывающая скобка располагается на строке, следующей за строкой-бъявления. 
+Однако парсер довольно непредсказуем, когда имеет дело с подобным стилем из-за
+реализации особого интерфейса работы оператора "точка с запятой".  Вы можете избежать головной боли 
+просто следуя стилю фигурных скобок, описаному  выше.
 
-## Parentheses
+## Круглые скобки
 
-In the rare cases when parenthetical blocks wrap across lines, the
-opening and closing parentheses should be unspaced and generally kept on the same
-lines as their content (Lisp-style):
+В тех редких случаях, когда круглые скобки обрамляют блок кода, расположенный на нескольких строках,
+открывающая и закрывающая скобка должны быть лишены отделяющих пробелов и располагаться на тех же стоках,
+что и внутренее содержимое блока (стиль Lisp):
 
     (this + is a very ++ long *
       expression)
 
-Parentheses also serve to disable semicolon inference, and so allow the developer
-to start lines with operators, which some prefer:
+Круглые скобки также служат для отключения интерфейса "точек с запятой", и чтобы позволить 
+разработчикам начинать строки с операторов, которые они предпочитают:
 
     (  someCondition
     || someOtherCondition
     || thirdCondition
     )
 
-A trailing parenthesis on the following line is acceptable in this case, for
-aesthetic reasons.
+Перенос закрывающей скобки на следующую строку здесь уместен по эстетическим соображениям.
